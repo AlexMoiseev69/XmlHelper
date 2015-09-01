@@ -27,37 +27,11 @@ public class Main {
             Document doc = dBuilder.parse(inputFile);
             doc.getDocumentElement().normalize();
 
-            NodeList nodeList = reader.parse(doc, "/class/student");
+            NodeList nodeList = reader.parse(doc, "/class/student/firstname");
             for (int i = 0; i < nodeList.getLength(); i++) {
                 Node nNode = nodeList.item(i);
-                System.out.println("\nCurrent Element :"
-                        + nNode.getNodeName());
-                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element eElement = (Element) nNode;
-                    System.out.println("Student roll no : "
-                            + eElement.getAttribute("rollno"));
-                    System.out.println("First Name : "
-                            + eElement
-                            .getElementsByTagName("firstname")
-                            .item(0)
-                            .getTextContent());
-                    System.out.println("Last Name : "
-                            + eElement
-                            .getElementsByTagName("lastname")
-                            .item(0)
-                            .getTextContent());
-                    System.out.println("Nick Name : "
-                            + eElement
-                            .getElementsByTagName("nickname")
-                            .item(0)
-                            .getTextContent());
-                    System.out.println("Marks : "
-                            + eElement
-                            .getElementsByTagName("marks")
-                            .item(0)
-                            .getTextContent());
-                    eElement.setNodeValue(eElement.getNodeValue()+"_TEST");
-                }
+                nNode.setTextContent("123123");
+                System.out.println(reader.getNodeAsString(nNode, null, true));
             }
             System.out.println(reader.getNodeAsString(doc, null, true));
         } catch (ParserConfigurationException e) {
